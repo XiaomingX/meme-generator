@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+<!-- Head -->
+
+{% block extrahead %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid #555;
+        background: white;
+    }
+
+    th,
+    tr,
+    td {
+        border-top: 1px solid #555 !important;
+        border-bottom: 1px solid #555 !important;
+    }
+
+    code {
+        padding: 2px 4px;
+        font-size: 90%;
+        color: #e83e8c;
+        background-color: #f9f2f4;
+        border-radius: 4px;
+    }
+
+    @media all and (max-width: 992px) {
+        .badges {
+            display: none;
+        }
+    }
+</style>
+
+{% endblock %}
+
+<!-- Navigation -->
+
+{% block next_prev %} {% endblock %} {% block repo %}
+
+<li class="nav-item">
+    <a href="https://api.memegen.link/docs/" class="nav-link">
+        <i class="fa-brands fa-github"></i>
+        GitHub
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="https://api.memegen.link/docs/" class="nav-link">
+        <i class="fa fa-book"></i>
+        Swagger
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="https://bsky.app/profile/memegen.link" class="nav-link">
+        <i class="fa-brands fa-bluesky"></i>
+        Bluesky
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="https://www.facebook.com/memegenlink" class="nav-link">
+        <i class="fa-brands fa-facebook"></i>
+        Facebook
+    </a>
+</li>
+
+<form class="form-inline m-2 my-lg-0">
+    <a
+        href="https://memecomplete.com/custom/?standard=true"
+        class="btn btn-sm btn-secondary"
+    >
+        Create a Meme
+    </a>
+</form>
+
+{% endblock %}
+
+<!-- Content -->
+
+{% block content%} {% if page.title == "Examples" %}
+
+<div class="col-12">
+    <div class="row justify-content-center">
+        <div class="col-12">{% include "content.html" %}</div>
+    </div>
+</div>
+
+{% else %}
+
+<div class="col-md-3">{% include "toc.html" %}</div>
+
+<div class="col-md-9 pt-2" role="main">{% include "content.html" %}</div>
+
+{% endif %} {% endblock%}
+
+<!-- Scripts -->
+
+{% block scripts %} {{ super() }}
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.11/iframeResizer.min.js"
+    integrity="sha512-HY1lApSG7xxx8mYzs/lxRs+c5AaDThRaa3pvQB6puiswvf2lWqMJVf+8qSGiL4ZXfHQoPIqbd1TlpqfycPo3cQ=="
+    crossorigin="anonymous"
+></script>
+
+<script>
+    iFrameResize({ checkOrigin: false, resizedCallback: onResized })
+    function onResized(iframe, height, width, type) {
+        $("#loading").hide()
+    }
+</script>
+
+{% endblock %}
+
+<!-- Footer -->
+
+{% block footer %} {% if page.title != "Examples" %}
+
+<hr />
+
+<p>
+    Copyright © {{ build_date_utc.year }}
+    <a href="https://jacebrowning.info">{{ config.site_author }}</a>
+</p>
+
+{% endif %} {% endblock %}
